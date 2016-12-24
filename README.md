@@ -7,7 +7,7 @@ An open-source Chrome Extension that allows you to view and manage your shows in
 - View and add new shows, update your library within Plex
 - View active downloads and activity
 
-### [Download for Google Chrome](https://chrome.google.com/webstore/detail/jfjmncmbmpnaljmmcmeefmkmionkojmd)
+### [Download for Google Chrome](https://chrome.google.com/webstore/detail/mhkdnppjenmiejganphkmhdfjnikgnjc)
 
 ## Preview
 

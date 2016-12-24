@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+
+  "name": "Sonarr for Plex",
+  "short_name": "Sonarr",
+  "description": "View and manage your shows in Sonarr directly in the Plex app",
+  "author": "Dan Bovey",
+  "version": "1.0.0",
+  "minimum_chrome_version": "36",
+
+  "permissions": [
+    "storage",
+    "*://app.plex.tv/*",
+    "*://*/"
+  ],
+
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  },
+
+  "content_scripts": [ {
+    "css": [ "css/style.css" ],
+    "js": ["js/content.js" ],
+    "matches": [ "http://app.plex.tv/*", "https://app.plex.tv/*"]
+  }],
+
+  "web_accessible_resources": [
+    "img/Sonarr.svg"
+  ],
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

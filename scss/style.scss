@@ -1,0 +1,258 @@
+@import "injections";
+
+.sonarr-btn {
+    top: -2px;
+
+    .sonarr-warn {
+        position: absolute;
+        top: 15px !important;
+        right: 8px;
+        font-size: 14px;
+    }
+}
+
+.sonarr-warn {
+    color: #F0AD4E;
+}
+
+.sonarr-alert {
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 9pt rgba(0, 0, 0, 0.5);
+    background: #000;
+
+    .sonarr-warn {
+        margin-right: 2px;
+    }
+}
+
+.sonarr-settings-feedback {
+    margin-left: 20px;
+
+    &.circle-ok {
+        color: #5CB85C;
+    }
+}
+
+.sonarr-content .filter-bar {
+    .btn {
+        margin-right: 15px;
+    }
+    .loading {
+        position: relative;
+        top: 14px;
+        left: 0;
+        margin-left: 0;
+        width: 10px;
+        height: 10px;
+    }
+}
+
+.sonarr-posters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.sonarr-poster {
+    height: 253px;
+    float: left;
+    margin: 0 10px 30px;
+}
+.sonarr-postercard {
+    position: relative;
+    width: 134px;
+    height: 201px;
+    transition: box-shadow 0.2s;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0 0 2px #CC7B19;
+    }
+
+    &.postercard-noclick {
+        cursor: initial;
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+
+    .sonarr-cover {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        .sonarr-cover-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            background-size: cover;
+            background-position: center center;
+        }
+    }
+}
+.sonarr-title {
+    width: 134px;
+    padding-top: 10px;
+    font-size: 13px;
+
+    a {
+        display: block;
+        overflow: hidden;
+        height: 20px;
+        max-width: 100%;
+        line-height: 20px;
+        user-select: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #FFF;
+        transition: color 0.1s;
+
+        &:hover, &:focus {
+            text-decoration: underline;
+            color: #FFF;
+        }
+    }
+    .secondary {
+        color: hsla(0, 0%, 100%, 0.45);
+    }
+    a.secondary:hover,  a.secondary:focus {
+        text-decoration: underline;
+        color: #FFF;
+    }
+    .sonarr-season-separator {
+        margin: 0 4px;
+    }
+}
+
+.sonarr-table {
+    width: 100%;
+
+    thead th {
+        border-top: 1px solid #2D2D2D;
+        border-bottom: 1px solid #0E0E0E;
+        background: #282828;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    td, th {
+        padding: 8px;
+        line-height: 1.71428571;
+    }
+}
+
+.progress {
+    height: 20px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(to bottom, #EBEBEB 0,#F5F5F5 100%);
+    background-repeat: repeat-x;
+
+    .progress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 12px;
+        line-height: 20px;
+        color: #FFF;
+        text-align: center;
+        background-color: #337AB7;
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        transition: width 0.6s ease;
+    }
+}
+
+.sonarr-table {
+    .label {
+        font-size: 11px;
+    }
+    .badge {
+        border-radius: 2px;
+    }
+    .protocol-torrent {
+        background-color: #00853D;
+    }
+    .protocol-usenet {
+        background-color: #17B1D9;
+    }
+}
+
+.sonarr-series-add-input {
+    margin-bottom: 30px;
+}
+
+.sonarr-season-list {
+    background: #1F1F1F;
+}
+
+.sonarr-show {
+    overflow: auto;
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .year {
+        display: inline-block;
+        margin-right: 10px;
+        font-style: italic;
+        color: #AAA;
+    }
+    .label {
+        margin-right: 10px;
+    }
+    
+    .input {
+        float: left;
+        margin-right: 10px;
+
+        label {
+            display: block;
+            color: #AAA;
+        }
+    }
+
+    .sonarr-poster {
+        margin: 0 20px 0 0;
+    }
+    .sonarr-postercard {
+        margin: 0;
+    }
+}
+
+.sonarr-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    background-position: center center;
+
+    &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50vh;
+        background: rgba(0, 0, 0, 0.5);
+        content: '';
+    }
+
+    @media(min-height: 800px) {
+        height: 40vh;
+
+        &:after {
+            height: 40vh;
+        }
+    }
+}

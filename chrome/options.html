@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sonarr for Plex Options</title>
+
+    <style>
+        body {
+            padding: 10px;
+        }
+        button {
+            cursor: pointer;
+        }
+        input {
+            width: 100%;
+        }
+        h3 {
+            margin-top: 0;
+            font-weight: bold;
+        }
+        .group {
+            padding: 10px 0;
+        }
+        .group:first-child {
+            padding-top: 5px;
+        }
+        .option {
+            padding: 6px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="group">
+        <h3>Sonarr URL</h3>
+        <div class="option">
+            <input type="text" id="base" placeholder="The URL of your Sonarr server">
+        </div>
+    </div>
+    <div class="group">
+        <h3>API key</h3>
+        <div class="option">
+            <input type="text" id="key" placeholder="Sonarr API key, found in Settings > General">
+        </div>
+    </div>
+    <div class="group">
+        <h3>Time to poll Sonarr for activity (in seconds)</h3>
+        <div class="option">
+            <input type="number" id="poll">
+        </div>
+    </div>
+    <div class="group">
+        <button type="button" id="save">Save</button>
+        <p id="status"></p>
+    </div>
+    <script src="js/options.js"></script>
+</body>
+</html>

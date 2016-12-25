@@ -96,7 +96,16 @@ module.exports = (series, pageBody, openPage) => {
             for(let n in seasons) {
                 seasonsArray.push([n, seasons[n]]);
             }
-            seasonsArray.sort((a, b) => a[0] < b[0]);
+            seasonsArray.sort((a, b) => {
+                if(parseInt(a[0], 10) > parseInt(b[0], 10)) {
+                    return -1;
+                }
+                if(parseInt(a[0], 10) < parseInt(b[0], 10)) {
+                    return 1;
+                }
+                
+                return 0;
+            });
             for(let n in seasonsArray) {
                 createSeasonList(seasonsArray[n], pageBody);
             }

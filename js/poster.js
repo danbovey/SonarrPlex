@@ -81,9 +81,7 @@ const Poster = {
             if(series.images[i].coverType == 'poster') {
                 const base = Storage.get().api.base;
                 let url = series.images[i].url;
-                if(url.indexOf('http') == -1) {
-                    url = path.join(base, url);
-                }
+                url = path.join(base, url).replace('.jpg', '-250.jpg');
                 coverImage.style.backgroundImage = 'url(' + url + ')';
             }
         }

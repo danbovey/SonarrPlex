@@ -8,7 +8,7 @@ injectShow(Page.openPage);
 const wait = () => {
     window.setTimeout(() => {
         if(document.querySelector('.nav-bar-right') != null) {
-            window.setTimeout(init, 200);
+            window.setTimeout(init, 500);
         } else {
             wait();
         }

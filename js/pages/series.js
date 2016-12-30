@@ -3,7 +3,10 @@ const moment = require('moment');
 const Storage = require('../storage');
 const Poster = require('../poster');
 
-const listSeries = (series, pageBody, openPage) => {
+let seriesList = [];
+let pageBody, openPage;
+
+const createBar = (pagePage, openPage) => {
     const bar = document.createElement('div');
     bar.classList.add('filter-bar');
     const addBtn = document.createElement('button');
@@ -36,11 +39,29 @@ const listSeries = (series, pageBody, openPage) => {
     });
     bar.appendChild(updateBtn);
 
+    const sortGroup = document.createElement('div');
+    sortGroup.setAttribute('class', 'btn-group pull-right');
+    const createSortBtn = (name, icon, filterFn) => {
+        const sortBtn = document.createElement('button');
+        sortBtn.setAttribute('class', 'btn btn-sm btn-default');
+        sortBtn.setAttribute('title', name);
+        sortBtn.addEventListener('click', () => createList(filterFn));
+        const sortIcon = document.createElement('span');
+        sortIcon.setAttribute('class', 'glyphicon ' + icon);
+        sortBtn.appendChild(sortIcon);
+        sortGroup.appendChild(sortBtn);
+    };
+    createSortBtn('All', 'unchecked', null);
+    createSortBtn('Monitored', 'bookmark', show => show.monitored);
+    createSortBtn('Continuing', 'play', show => show.status == 'continuing');
+    createSortBtn('Ended', 'stop', show => show.status == 'ended');
+    createSortBtn('Missing', 'warning-sign', show => show.episodeFileCount < show.totalEpisodeCount);
+
     pageBody.appendChild(bar);
+};
 
-    const posters = document.createElement('div');
-    posters.classList.add('sonarr-posters');
-
+const createList = (filterFn = null) => {
+    let series = seriesList;
     // Sort the series by next airing
     for(let s in series) {
         if(typeof series[s].nextAiring == 'undefined') {
@@ -49,28 +70,38 @@ const listSeries = (series, pageBody, openPage) => {
     }
     series = series.sort((a, b) => moment(a.nextAiring).diff(moment(b.nextAiring)));
 
+    // If we are using a filter
+    if(filterFn != null) {
+        for(var s in series) {
+            if(!filterFn(series[s])) {
+                delete series[s];
+            }
+        }
+    }
+
+    // Create the list of series
+    let posters = document.querySelector('.sonarr-posters');
+    if(posters != null) {
+        while(posters.hasChildNodes()) {
+            posters.removeChild(posters.lastChild);
+        }
+    } else {
+        posters = document.createElement('div');
+        posters.classList.add('sonarr-posters');
+        pageBody.appendChild(posters);
+    }
+
     for(let s in series) {
         const poster = Poster.createSeries(series[s], () => openPage('seriesDetail', series[s]));
         posters.appendChild(poster);
     }
-
-    pageBody.appendChild(posters);
 }
 
-module.exports = (series, pageBody, openPage) => {
-    if(typeof Storage.collections.series == 'undefined' || Storage.collections.series == null) {
-        chrome.runtime.sendMessage({ endpoint: 'series' }, resp => {
-            if(!resp.err) {
-                listSeries(resp.res.body, pageBody, openPage);
-                Storage.collections.series = resp.res.body;
-            } else {
-                const warning = document.createElement('p');
-                warning.classList.add('sonarr-alert');
-                warning.innerHTML = '<i class="sonarr-warn glyphicon circle-exclamation-mark"></i> Can\'t connect to Sonarr. Please check API settings.';
-                pageBody.appendChild(warning);
-            }
-        });
-    } else {
-        listSeries(series, pageBody, openPage);
-    }
+module.exports = (series, body, open) => {
+    seriesList = series;
+    pageBody = body;
+    openPage = open;
+
+    createBar();
+    createList();
 };

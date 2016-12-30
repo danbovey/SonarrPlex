@@ -33,24 +33,20 @@ const API = {
         });
     },
     get: (endpoint, params = {}) => {
-        return Storage.load()
-            .then(options => {
-                const url = path.join(options.api.base, 'api', endpoint);
+        const options = Storage.get();
+        const url = path.join(options.api.base, 'api', endpoint);
 
-                return request.get(url)
-                    .set('X-Api-Key', options.api.key)
-                    .query(params);
-            });
+        return request.get(url)
+            .set('X-Api-Key', options.api.key)
+            .query(params);
     },
     post: (endpoint, params = {}) => {
-        return Storage.load()
-            .then(options => {
-                const url = path.join(options.api.base, 'api', endpoint);
+        const options = Storage.get();
+        const url = path.join(options.api.base, 'api', endpoint);
 
-                return request.post(url)
-                    .set('X-Api-Key', options.api.key)
-                    .send(params);
-            });
+        return request.post(url)
+            .set('X-Api-Key', options.api.key)
+            .send(params);
     }
 };
 

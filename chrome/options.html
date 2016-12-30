@@ -27,6 +27,9 @@
         .option {
             padding: 6px 0;
         }
+        .help {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +37,13 @@
         <h3>Sonarr URL</h3>
         <div class="option">
             <input type="text" id="base" placeholder="The URL of your Sonarr server">
+        </div>
+    </div>
+    <div class="group">
+        <h3>Sonarr URL Base</h3>
+        <p class="help">This should be at the end of the Sonarr URL as well</p>
+        <div class="option">
+            <input type="text" id="sonarr_base" placeholder="The URL Base (for reverse proxy support, default is empty)">
         </div>
     </div>
     <div class="group">

@@ -1,5 +1,3 @@
-const API = require('./api');
-
 const Navbar = {
     create: (pageToggle) => {
         const navbar = document.querySelector('.nav-bar-right');

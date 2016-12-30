@@ -77,13 +77,18 @@ const Poster = {
         const coverImage = document.createElement('div');
         coverImage.classList.add('sonarr-cover-image');
 
+        const options = Storage.get();
         for(let i in series.images) {
             if(series.images[i].coverType == 'poster') {
-                const base = Storage.get().api.base;
                 let url = series.images[i].url;
                 if(url.indexOf('http') == -1) {
-                    // URL is relative to Sonarr, so we can request a smaller poster
-                    url = path.join(base, url).replace('.jpg', '-250.jpg');
+                    // Remove the URL Base from the relative URL and replace any double slashes
+                    if(options.api.sonarr_base) {
+                        url = url.replace(options.api.sonarr_base, '')
+                            .replace(/([^:]\/)\/+/g, '/');
+                    }
+                    // Request a smaller sized poster
+                    url = path.join(options.api.base, url).replace('.jpg', '-250.jpg');;
                 }
                 coverImage.style.backgroundImage = 'url(' + url + ')';
             }

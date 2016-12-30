@@ -2,6 +2,7 @@ let options = {
     api: {
         key: '',
         base: 'http://localhost:8989',
+        sonarr_base: '',
         poll: 60
     }
 };

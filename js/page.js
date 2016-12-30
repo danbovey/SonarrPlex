@@ -1,6 +1,5 @@
 const moment = require('moment');
 
-const API = require('./api');
 const Storage = require('./storage');
 const Poster = require('./poster');
 
@@ -117,7 +116,7 @@ const Page = {
             if(typeof Storage.collections[page] != 'undefined' && Storage.collections[page] == null) {
                 chrome.runtime.sendMessage({ endpoint: page }, resp => {
                     if(!resp.err) {
-                        pages[page](data, Page.body, Page.openPage);
+                        pages[page](resp.res.body, Page.body, Page.openPage);
                         Storage.collections[page] = resp.res.body;
                     } else {
                         const warning = document.createElement('p');

@@ -1,20 +1,20 @@
 const API = require('./api');
+const Storage = require('./storage');
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(sender.tab ?
-        "from a content script:" + sender.tab.url :
-        "from the extension");
-
     if(request.options) {
         return chrome.tabs.create({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
     }
 
-    API[request.endpoint](request.params || {})
-        .then(res => {
-            sendResponse({ res });
-        })
-        .catch(err => {
-            sendResponse({ err });
+    Storage.load()
+        .then(() => {
+            API[request.endpoint](request.params || {})
+                .then(res => {
+                    sendResponse({ res });
+                })
+                .catch(err => {
+                    sendResponse({ err });
+                });
         });
 
     return true;

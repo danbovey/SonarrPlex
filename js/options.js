@@ -6,12 +6,15 @@ Storage.load()
         const status = document.querySelector('#status');
         const inputs = {
             base: document.querySelector('#base'),
+            sonarr_base: document.querySelector('#sonarr_base'),
             key: document.querySelector('#key'),
             poll: document.querySelector('#poll')
         };
 
         for(let name in inputs) {
-            inputs[name].value = options.api[name];
+            if(typeof options.api[name] != 'undefined') {
+                inputs[name].value = options.api[name];
+            }
         }
 
         submit.addEventListener('click', e => {

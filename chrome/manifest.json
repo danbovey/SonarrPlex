@@ -10,6 +10,7 @@
 
   "permissions": [
     "storage",
+    "background",
     "*://app.plex.tv/*",
     "*://*/"
   ],

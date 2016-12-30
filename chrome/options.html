@@ -30,6 +30,35 @@
         .help {
             margin-bottom: 0;
         }
+        #plex-url-list {
+            overflow-y: scroll;
+            height: 100px;
+            padding: 0;
+            border: 1px solid #BBB;
+            list-style: none;
+        }
+        #plex-url-list li {
+            padding: 6px 8px;
+        }
+        #plex-url-list li:nth-child(even) {
+            background: #F1F1F1;
+        }
+        #plex-url-list li button {
+            float: right;
+            width: 20px;
+            height: 14px;
+            min-width: auto;
+            min-height: auto;
+            padding: 0;
+            line-height: 0;
+        }
+        #new-plex-url {
+            width: 80%;
+        }
+        #add-plex-url {
+            float: right;
+            width: 5%;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +86,12 @@
         <div class="option">
             <input type="number" id="poll">
         </div>
+    </div>
+    <div class="group">
+        <h3>Plex URLs</h3>
+        <p>Manage the URLs you use to access Plex (i.e. localhost:32400). The extension will always run on <code>app.plex.tv</code>.</p>
+        <ul id="plex-url-list"></ul>
+        <input type="text" id="new-plex-url" placeholder="http://"><button type="button" id="add-plex-url">+</button>
     </div>
     <div class="group">
         <button type="button" id="save">Save</button>

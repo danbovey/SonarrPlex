@@ -1,6 +1,11 @@
 const Navbar = {
     create: (pageToggle) => {
         const navbar = document.querySelector('.nav-bar-right');
+        
+        if(navbar.querySelector('.sonarr-btn')) {
+            return;
+        }
+
         const existingBtn = navbar.querySelector('.activity-btn').parentNode;
         const btn = existingBtn.cloneNode(true);
         btn.classList.remove('active');

@@ -4,7 +4,8 @@ let options = {
         base: 'http://localhost:8989',
         sonarr_base: '',
         poll: 60
-    }
+    },
+    plexUrls: []
 };
 
 const Storage = {

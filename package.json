@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "moment": "^2.17.1",
-    "superagent": "^3.3.1"
+    "superagent": "^3.3.1",
+    "url-join": "^2.0.5"
   }
 }

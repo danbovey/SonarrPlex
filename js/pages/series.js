@@ -6,7 +6,7 @@ const Poster = require('../poster');
 let seriesList = [];
 let pageBody, openPage;
 
-const createBar = (pagePage, openPage) => {
+const createBar = () => {
     const bar = document.createElement('div');
     bar.classList.add('filter-bar');
     const addBtn = document.createElement('button');

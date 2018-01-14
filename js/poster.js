@@ -1,8 +1,9 @@
 const moment = require('moment');
-const path = require('path');
+const urljoin = require('url-join');
 
 const Storage = require('./storage');
 const Page = require('./page');
+const imgUrl = require('./helpers/imgUrl');
 
 const Poster = {
     createEpisode: (episode) => {
@@ -80,17 +81,12 @@ const Poster = {
         const options = Storage.get();
         for(let i in series.images) {
             if(series.images[i].coverType == 'poster') {
-                let url = series.images[i].url;
-                if(url.indexOf('http') == -1) {
-                    // Remove the URL Base from the relative URL and replace any double slashes
-                    if(options.api.sonarr_base) {
-                        url = url.replace(options.api.sonarr_base, '')
-                            .replace(/([^:]\/)\/+/g, '/');
-                    }
-                    // Request a smaller sized poster
-                    url = path.join(options.api.base, url).replace('.jpg', '-250.jpg');;
+                let posterUrl = imgUrl(series.images[i].url, options);
+                // If it's a Sonarr URL, request a smaller-sized poster
+                if(posterUrl.indexOf(options.api.base) > -1) {
+                    posterUrl.replace('.jpg', '-250.jpg');
                 }
-                coverImage.style.backgroundImage = 'url(' + url + ')';
+                coverImage.style.backgroundImage = 'url(' + posterUrl + ')';
             }
         }
 

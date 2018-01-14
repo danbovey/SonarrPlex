@@ -1,8 +1,9 @@
 const moment = require('moment');
-const path = require('path');
+const url = require('url');
 
 const Storage = require('../storage');
 const Poster = require('../poster');
+const imgUrl = require('../helpers/imgUrl');
 
 const createSeasonList = (season, pageBody) => {
     const list = document.createElement('div');
@@ -31,6 +32,7 @@ const createSeasonList = (season, pageBody) => {
         monitorBtn.setAttribute('class', 'btn btn-sm btn-default');
         monitorBtn.innerHTML = '<span class="glyphicon bookmark"></span>';
         monitorBtn.addEventListener('click', () => {
+            alert(`This isn't implemented yet, sorry!`);
             console.log('toggle monitoring of episode ' + episode.id);
         });
         createCell(row, monitorBtn);
@@ -45,6 +47,7 @@ const createSeasonList = (season, pageBody) => {
         searchBtn.setAttribute('class', 'btn btn-sm btn-default');
         searchBtn.innerHTML = '<span class="glyphicon search"></span>';
         searchBtn.addEventListener('click', () => {
+            alert(`This isn't implemented yet, sorry!`);
             console.log('search for episode ' + episode.id);
         });
         createCell(row, searchBtn);
@@ -71,8 +74,11 @@ module.exports = (series, pageBody, openPage) => {
         if(!resp.err) {
             const bg = document.createElement('div');
             bg.classList.add('sonarr-background');
-            const url = path.join(Storage.get().api.base, series.images[0] ? series.images[0].url : '');
-            bg.style.backgroundImage = 'url(' + url + ')';
+            if(series.images.length) {
+                const options = Storage.get();
+                const bgUrl = imgUrl(series.images[0] ? series.images[0].url : '', options);
+                bg.style.backgroundImage = 'url(' + bgUrl + ')';
+            }
             document.querySelector('#content').appendChild(bg);
 
             const show = document.createElement('div');

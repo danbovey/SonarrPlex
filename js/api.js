@@ -1,5 +1,5 @@
 const request = require('superagent');
-const path = require('path');
+const urljoin = require('url-join');
 
 const Storage = require('./storage');
 
@@ -34,17 +34,15 @@ const API = {
     },
     get: (endpoint, params = {}) => {
         const options = Storage.get();
-        const url = path.join(options.api.base, 'api', endpoint);
 
-        return request.get(url)
+        return request.get(urljoin(options.api.base, 'api', endpoint))
             .set('X-Api-Key', options.api.key)
             .query(params);
     },
     post: (endpoint, params = {}) => {
         const options = Storage.get();
-        const url = path.join(options.api.base, 'api', endpoint);
 
-        return request.post(url)
+        return request.post(urljoin(options.api.base, 'api', endpoint))
             .set('X-Api-Key', options.api.key)
             .send(params);
     }
